@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Calculator</h1>
+
+    <div id="display" style="border: 1px solid black; width: 250px; height: 25px;">123</div>
+
+    <div id="buttons">
+        <button>9</button>
+        <button>8</button>
+        <button>7</button>
+        <button>6</button>
+        <button>5</button>
+        <button>4</button>
+        <button>3</button>
+        <button>2</button>
+        <button>1</button>
+    </div>
+
+    <div id="operator">
+        <button>+</button>
+        <button>-</button>
+        <button>x</button>
+        <button>÷</button>
+    </div>
+    <button id="equal">=</button>
+    <button id="clear">CE</button>
+</body>
+<script>
+
+    const display = document.querySelector("#display")
+    const buttons = document.querySelectorAll("#buttons button")
+    const operatorButton = document.querySelectorAll("#operator button")
+    const equalButton = document.querySelector("#equal")
+    const clearButton = document.querySelector("#clear")
+
+    let num1 = '';
+    let num2 = '';
+    let operator = '';
+    let isItSecondNumber = '';
+
+
+    buttons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            display.textContent += button.textContent
+        })
+    })
+</script>
+</html>
