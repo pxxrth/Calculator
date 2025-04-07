@@ -20,6 +20,7 @@
         <button>3</button>
         <button>2</button>
         <button>1</button>
+        <button>0</button>
     </div>
 
     <div id="operator">
@@ -86,11 +87,21 @@
             }
         }
         display.textContent = result;
-        num1 = "";
+        num1 = result.toString();
         num2 = "";
         operator = "";
         isItSecondNumber = false;        
     })
+
+    clearButton.addEventListener("click", function() {
+        display.textContent = "0";
+        num1 = "";
+        num2 = "";
+        operator = "";
+        isItSecondNumber = false;  
+    })
+
+
 
     
 </script>
