@@ -4,102 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="StyleSheet" href="styles.css">
 </head>
 <body>
-    <h1 style="text-align: center;">Calculator</h1>
-
-    <div id="display" style="border: 1px solid black; width: 250px; height: 25px;"></div>
-
-    <div id="buttons">
-        <button>9</button>
-        <button>8</button>
-        <button>7</button>
-        <button>6</button>
-        <button>5</button>
-        <button>4</button>
-        <button>3</button>
-        <button>2</button>
-        <button>1</button>
-        <button>0</button>
-    </div>
-
-    <div id="operator">
-        <button>+</button>
-        <button>-</button>
-        <button>x</button>
-        <button>÷</button>
-    </div>
-    <button id="equal">=</button>
-    <button id="clear">CE</button>
+    <h1>Calculator</h1>
+    <div id="calculator-container">
+        <div id="display">0</div>
+        <div>
+            <button id="equalButton">=</button>
+            <button id="clear">CE</button>
+        </div>
+        <div id="buttons-container">
+            <div id="buttons">
+                <button>9</button>
+                <button>8</button>
+                <button>7</button>
+                <button>6</button>
+                <button>5</button>
+                <button>4</button>
+                <button>3</button>
+                <button>2</button>
+                <button>1</button>
+                <button>0</button>
+                <button>.</button>
+            </div>
+            <div id="operator">
+                <button>+</button>
+                <button>-</button>
+                <button>x</button>
+                <button>÷</button>
+            </div>
+        </div>
 </body>
 <script>
 
-    const display = document.querySelector("#display")
-    const buttons = document.querySelectorAll("#buttons button")
-    const operatorButton = document.querySelectorAll("#operator button")
-    const equalButton = document.querySelector("#equal")
-    const clearButton = document.querySelector("#clear")
+const display = document.querySelector("#display")
+        const equal = document.querySelector("#equalButton")
+        const clear = document.querySelector("#clear")
+        const numberButton = document.querySelectorAll("#buttons button")
+        const operatorButton = document.querySelectorAll("#operator button")
 
-    let num1 = '';
-    let num2 = '';
-    let operator = '';
-    let isItSecondNumber = false;
+        let num1 = ""
+        let num2 = ""
+        let operator = ""
+        let isItSecondNumber = false;
 
 
-    buttons.forEach(function(button) {
+        // store the first number
+        numberButton.forEach(function(button) {
         button.addEventListener("click", function() {
-            const value = button.textContent;
-
-            if (isItSecondNumber === true) {
-                num2 += value
-                display.textContent = num2
-            } else {
-                num1 += value;
-                display.textContent = num1;
-            }
-
+        const value = button.textContent
+        if (isItSecondNumber) {
+        num2 += value;
+        display.textContent = num2
+        } else {
+        num1 += value;
+        display.textContent = num1
+        }
         })
-    })
+        })
 
-    operatorButton.forEach(function(button) {
+        // operators after first number is stored
+        operatorButton.forEach(function(button) {
         button.addEventListener("click", function() {
-            operator = button.textContent;
-            isItSecondNumber = true
+        operator = button.textContent;
+        isItSecondNumber = true;
         })
-    })
+        })
 
-    equalButton.addEventListener("click", function() {
+        // equate the stored numbers
+        equal.addEventListener("click", function() {
         let result;
         const n1 = Number(num1)
         const n2 = Number(num2)
 
         if(operator === "+") {
-            result = n1 + n2;
-        } else if(operator === "-") {
-            result = n1 - n2
+        result = n1 + n2
+        } else if (operator === "-") {
+        result = n1 - n2
         } else if(operator === "x") {
-            result = n1*n2
+        result = n1 * n2
         } else if(operator === "÷") {
-            if(num2 === "0") {
-                result = "ERROR"
-            } else {
-                result = n1 / n2
-            }
+        if(n2 === 0) {
+        result = "ERROR"
+        } else {
+        result = n1 / n2
         }
-        display.textContent = result;
-        num1 = result.toString();
-        num2 = "";
-        operator = "";
-        isItSecondNumber = false;        
-    })
+        }
 
-    clearButton.addEventListener("click", function() {
-        display.textContent = "0";
-        num1 = "";
-        num2 = "";
-        operator = "";
-        isItSecondNumber = false;  
-    })
+        display.textContent = result
+
+        num1 = result.toString();
+        num2 = ""
+        operator = ""
+        isItSecondNumber = false
+        })
+
+        // clear everything with CE
+        clear.addEventListener("click", function() {
+        display.textContent = '0'
+        num1 = ""
+        num2 = ""
+        operator = ""
+        isItSecondNumber = false;
+        })
 
 
 
