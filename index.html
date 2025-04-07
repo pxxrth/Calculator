@@ -8,7 +8,7 @@
 <body>
     <h1 style="text-align: center;">Calculator</h1>
 
-    <div id="display" style="border: 1px solid black; width: 250px; height: 25px;">123</div>
+    <div id="display" style="border: 1px solid black; width: 250px; height: 25px;"></div>
 
     <div id="buttons">
         <button>9</button>
@@ -42,13 +42,56 @@
     let num1 = '';
     let num2 = '';
     let operator = '';
-    let isItSecondNumber = '';
+    let isItSecondNumber = false;
 
 
     buttons.forEach(function(button) {
         button.addEventListener("click", function() {
-            display.textContent += button.textContent
+            const value = button.textContent;
+
+            if (isItSecondNumber === true) {
+                num2 += value
+                display.textContent = num2
+            } else {
+                num1 += value;
+                display.textContent = num1;
+            }
+
         })
     })
+
+    operatorButton.forEach(function(button) {
+        button.addEventListener("click", function() {
+            operator = button.textContent;
+            isItSecondNumber = true
+        })
+    })
+
+    equalButton.addEventListener("click", function() {
+        let result;
+        const n1 = Number(num1)
+        const n2 = Number(num2)
+
+        if(operator === "+") {
+            result = n1 + n2;
+        } else if(operator === "-") {
+            result = n1 - n2
+        } else if(operator === "x") {
+            result = n1*n2
+        } else if(operator === "÷") {
+            if(num2 === "0") {
+                result = "ERROR"
+            } else {
+                result = n1 / n2
+            }
+        }
+        display.textContent = result;
+        num1 = "";
+        num2 = "";
+        operator = "";
+        isItSecondNumber = false;        
+    })
+
+    
 </script>
 </html>
